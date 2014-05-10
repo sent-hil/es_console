@@ -36,6 +36,10 @@ module EsConsole
       resp['count']
     end
 
+    def index(index)
+      Index.new(client, index).pry
+    end
+
     private
 
     def configure_defaults

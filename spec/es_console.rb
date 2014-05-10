@@ -45,4 +45,9 @@ describe EsConsole do
       subject.count.should == 4
     end
   end
+
+  it 'changes context to index' do
+    EsConsole::Index.any_instance.should_receive :pry
+    subject.index 'greeting'
+  end
 end
