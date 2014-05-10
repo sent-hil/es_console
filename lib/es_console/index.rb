@@ -9,6 +9,11 @@ module EsConsole
       configure_pry
     end
 
+    def count(opts={})
+      resp = client.count({index:index}.merge(opts))
+      resp['count']
+    end
+
     private
 
     def configure_pry

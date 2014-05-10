@@ -50,4 +50,19 @@ describe EsConsole do
     EsConsole::Index.any_instance.should_receive :pry
     subject.index 'greeting'
   end
+
+  context EsConsole::Index do
+    subject do
+      client = Elasticsearch::Client.new
+      index  = EsConsole::Index.new(client, 'greeting')
+
+      index
+    end
+
+    it 'gets count' do
+      VCR.use_cassette 'index_count' do
+        subject.count.should == 2
+      end
+    end
+  end
 end
