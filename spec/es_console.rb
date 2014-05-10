@@ -10,16 +10,27 @@ describe EsConsole do
     EsConsole::Console.new
   end
 
-  context '#url' do
-    it 'has default url' do
-      subject.url.should == 'http://localhost:9200'
+  it 'initializes client' do
+    subject.client.class.should == Elasticsearch::Transport::Client
+  end
+
+  it 'has default url' do
+    subject.url.should == 'http://localhost:9200'
+  end
+
+  context 'new url' do
+    let(:new_url) {'http://localhost:9201'}
+
+    before do
+      subject.url new_url
     end
 
     it 'sets new url' do
-      new_url = 'http://localhost:9201'
-
-      subject.url new_url
       subject.url.should == new_url
+    end
+
+    it 'creates new client' do
+      subject.client.transport.options[:url] == new_url
     end
   end
 end
