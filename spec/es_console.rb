@@ -65,4 +65,19 @@ describe EsConsole do
       end
     end
   end
+
+  context EsConsole::Type do
+    subject do
+      client = Elasticsearch::Client.new
+      type   = EsConsole::Type.new(client, 'greeting', 'hello')
+
+      type
+    end
+
+    it 'gets count' do
+      VCR.use_cassette 'type_count' do
+        subject.count.should == 1
+      end
+    end
+  end
 end
