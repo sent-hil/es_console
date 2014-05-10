@@ -23,13 +23,25 @@ module EsConsole
       @url
     end
 
-    def stats
+    def stats(opts={})
+      resp = client.indices.stats opts
+
+      {}.tap do |result|
+        resp['indices'].each do |k, v|
+          result[k] = v['primaries']['docs']['count']
+        end
+      end
+    end
+
+    def count(opts={})
+      resp = client.count opts
+      resp['count']
     end
 
     private
 
     def configure_defaults
-      @url    = 'http://localhost:9200'
+      @url = 'http://localhost:9200'
     end
 
     def initialize_client

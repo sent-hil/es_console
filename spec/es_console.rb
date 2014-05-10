@@ -33,4 +33,16 @@ describe EsConsole do
       subject.client.transport.options[:url] == new_url
     end
   end
+
+  it 'gets all stats' do
+    VCR.use_cassette('all_stats') do
+      subject.stats.should == {'greeting'=>2, 'myindexa'=>1, 'myindex'=>1}
+    end
+  end
+
+  it 'gets all count' do
+    VCR.use_cassette('all_count') do
+      subject.count.should == 4
+    end
+  end
 end
