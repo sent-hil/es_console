@@ -12,6 +12,7 @@ module EsConsole
     def initialize
       configure_defaults
       initialize_client
+      configure_pry
     end
 
     def url(url=nil)
@@ -46,6 +47,13 @@ module EsConsole
 
     def initialize_client
       @client = Elasticsearch::Client.new url: @url
+    end
+
+    def configure_pry
+      Pry.config.prompt = [
+        proc { "[es]> " },
+        proc { "[es]* " },
+      ]
     end
   end
 end
