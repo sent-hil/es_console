@@ -1,17 +1,16 @@
+require_relative './resource'
+
 module EsConsole
-  class Index
-    attr_reader :client, :index
+  class Index < Resource
+    attr_reader :index
 
     def initialize(client, index)
       @client = client
       @index  = index
 
-      configure_pry
-    end
+      @default_args = {index: index}
 
-    def count(opts={})
-      resp = client.count({index:index}.merge(opts))
-      resp['count']
+      configure_pry
     end
 
     private
