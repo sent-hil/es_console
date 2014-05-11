@@ -2,16 +2,16 @@ require_relative 'spec_helper'
 
 describe EsConsole do
   it 'starts console' do
-    EsConsole::Api.any_instance.should_receive :pry
+    EsConsole::Console.any_instance.should_receive :pry
     EsConsole.start
   end
 
   subject do
-    EsConsole::Api.new
+    EsConsole::Console.new
   end
 
   it 'initializes client' do
-    subject.client.class.should == Elasticsearch::Transport::Client
+    subject.api.client.class.should == Elasticsearch::Transport::Client
   end
 
   it 'has default url' do
@@ -30,7 +30,7 @@ describe EsConsole do
     end
 
     it 'creates new client' do
-      subject.client.transport.options[:url] == new_url
+      subject.api.client.transport.options[:url] == new_url
     end
   end
 
