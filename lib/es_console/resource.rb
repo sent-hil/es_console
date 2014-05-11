@@ -30,10 +30,10 @@ module EsConsole
         if args.empty?
           resp = res.send method, default_args
         elsif args[0].is_a? Hash
-          resp = res.send method, default_args.merge(args)
+          resp = res.send method, default_args.merge(args[0])
         elsif args[1].is_a? Hash
           resp = res.send method, default_args.merge(
-            {id: args[0]}.merge(args)
+            {id: args[0]}.merge(args[1])
           )
         else
           resp = res.send method, default_args.merge({

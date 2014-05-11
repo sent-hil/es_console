@@ -52,4 +52,54 @@ describe EsConsole::Resource do
 
     resource.new(client, {a: 1}).count
   end
+
+  it 'accepts id as first arg' do
+    resource = Class.new described_class
+    resource.def_method :count
+
+    client = double 'client'
+    client.should_receive(:count).with({id: 1}).and_return(1)
+
+    resource.new(client).count(1).should == 1
+  end
+
+  it 'merges id with default args' do
+    resource = Class.new described_class
+    resource.def_method :count
+
+    client = double 'client'
+    client.should_receive(:count).with({id:1, a:1}).and_return(1)
+
+    resource.new(client, {a:1}).count(1).should == 1
+  end
+
+  it 'accepts hash as first arg' do
+    resource = Class.new described_class
+    resource.def_method :count
+
+    client = double 'client'
+    client.should_receive(:count).with({id: 1}).and_return(1)
+
+    resource.new(client).count({id:1}).should == 1
+  end
+
+  it 'accepts id and hash as args' do
+    resource = Class.new described_class
+    resource.def_method :count
+
+    client = double 'client'
+    client.should_receive(:count).with({id: 1, a:1}).and_return(1)
+
+    resource.new(client).count(1, {a:1}).should == 1
+  end
+
+  it 'merges id and hash with default args' do
+    resource = Class.new described_class
+    resource.def_method :count
+
+    client = double 'client'
+    client.should_receive(:count).with({id:1, a:1, b:1}).and_return(1)
+
+    resource.new(client, {a:1}).count(1, {b:1}).should == 1
+  end
 end
