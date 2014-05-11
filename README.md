@@ -39,12 +39,19 @@ Getting cluster stats:
 Interacting with indexes:
 
 ```
-# set index
+# change into index context
 [es]> index 'movies'
 
-# check if index exists
-[es:'movies']> exists?
-> false
+# get types of index
+[es]> types
+> ['hello']
+
+# get mapping
+[es]> mapping
+
+# check if type exists
+[es]> exists('hello')
+> true
 
 # get mapping
 [es:'movies']> mapping
@@ -53,7 +60,7 @@ Interacting with indexes:
 Interacting with types:
 
 ```
-# set type
+# change into type context
 [es:'movies']> type 'adventure'
 
 # get count
@@ -65,4 +72,7 @@ Interacting with types:
 
 # get document source
 [es:'movies:adventure']> get_source 1
+
+# check if document exists
+[es:'movies:adventure']> exists? 1
 ```
