@@ -19,12 +19,14 @@ module EsConsole
       define_method name do |*args|
         cl = client
 
-        if method.is_a? Array
-          method[0...method.length-1].each do |meth|
-            cl = cl.send meth
+        meth = if method.is_a? Array
+          method[0...method.length-1].each do |m|
+            cl = cl.send m
           end
 
-          meth = method.last
+          method.last
+        else
+          method
         end
 
         if args.empty?
