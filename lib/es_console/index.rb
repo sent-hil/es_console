@@ -19,6 +19,10 @@ module EsConsole
     def_method :exists, method: 'indices.exists_type',
       first_field: :type
 
+    def_method :delete, parser: proc {|resp|
+      resp['ok']
+    }, method: 'indices.delete'
+
     def initialize(client, index, default_args={})
       @index = index
 

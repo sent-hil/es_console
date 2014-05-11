@@ -82,6 +82,12 @@ describe EsConsole do
         subject.exists('hello').should == true
       end
     end
+
+    it 'deletes' do
+      VCR.use_cassette 'index_delete' do
+        subject.delete.should == true
+      end
+    end
   end
 
   context EsConsole::Type do
@@ -114,6 +120,12 @@ describe EsConsole do
       VCR.use_cassette 'type_exists' do
         subject.exists('1').should == true
         subject.exists?('1').should == true
+      end
+    end
+
+    it 'deletes by id' do
+      VCR.use_cassette 'type_delete_doc' do
+        subject.delete('1').should_not == nil
       end
     end
   end

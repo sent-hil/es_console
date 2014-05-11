@@ -6,6 +6,7 @@ module EsConsole
     def_method :get_source
     def_method :exists
     def_method :exists?, method: :exists
+    def_method :delete
 
     attr_reader :type
 
