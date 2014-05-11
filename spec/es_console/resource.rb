@@ -112,4 +112,14 @@ describe EsConsole::Resource do
 
     resource.new(client).count(1).should == 1
   end
+
+  it 'allows specifiying second field' do
+    resource = Class.new described_class
+    resource.def_method :count, :second_field => :b
+
+    client = double 'client'
+    client.should_receive(:count).with({id:1,b:{a:1}}).and_return(1)
+
+    resource.new(client).count(1, {a:1}).should == 1
+  end
 end

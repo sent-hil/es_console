@@ -10,6 +10,7 @@ module EsConsole
     def self.def_method(name, opts={})
       method = opts[:method] || name
       first_field = opts[:first_field] || :id
+      second_field = opts[:second_field]
 
       if method.is_a? String
         method = method.split('.')
@@ -31,8 +32,14 @@ module EsConsole
         elsif args[0].is_a? Hash
           resp = cl.send method, default_args.merge(args[0])
         elsif args[1].is_a? Hash
+          second = if second_field
+            {second_field => args[1]}
+          else
+            args[1]
+          end
+
           resp = cl.send method, default_args.merge(
-            {first_field => args[0]}.merge(args[1])
+            {first_field => args[0]}.merge(second)
           )
         else
           resp = cl.send method, default_args.merge(
