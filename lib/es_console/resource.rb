@@ -9,6 +9,7 @@ module EsConsole
 
     def self.def_method(name, opts={})
       method = opts[:method] || name
+      first_field = opts[:first_field] || :id
 
       if method.is_a? String
         if method.include?('.')
@@ -33,12 +34,12 @@ module EsConsole
           resp = res.send method, default_args.merge(args[0])
         elsif args[1].is_a? Hash
           resp = res.send method, default_args.merge(
-            {id: args[0]}.merge(args[1])
+            {first_field => args[0]}.merge(args[1])
           )
         else
-          resp = res.send method, default_args.merge({
-            id: args[0]
-          })
+          resp = res.send method, default_args.merge(
+            {first_field => args[0]}
+          )
         end
 
         if parser = opts[:parser] and parser.is_a? Proc
