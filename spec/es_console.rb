@@ -72,13 +72,13 @@ describe EsConsole do
     end
 
     it 'gets mapping' do
-      VCR.use_cassette 'get_mapping' do
+      VCR.use_cassette 'index_mapping' do
         subject.mapping.should_not == nil
       end
     end
 
     it 'checks for existence' do
-      VCR.use_cassette 'type_exists' do
+      VCR.use_cassette 'index_type_exists' do
         subject.exists('hello').should == true
       end
     end
@@ -99,19 +99,19 @@ describe EsConsole do
     end
 
     it 'gets by id' do
-      VCR.use_cassette 'get_id' do
+      VCR.use_cassette 'type_get_doc' do
         subject.get('1').should_not == nil
       end
     end
 
     it 'gets source by id' do
-      VCR.use_cassette 'get_source_id' do
+      VCR.use_cassette 'type_get_source' do
         subject.get_source('1').should_not == nil
       end
     end
 
     it 'checks for existence of document' do
-      VCR.use_cassette 'get_source_id' do
+      VCR.use_cassette 'type_exists' do
         subject.exists('1').should == true
         subject.exists?('1').should == true
       end
