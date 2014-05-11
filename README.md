@@ -43,18 +43,20 @@ Interacting with indexes:
 [es]> index 'movies'
 
 # get types of index
-[es]> types
+[es:'movies']> types
 > ['hello']
 
-# get mapping
-[es]> mapping
-
 # check if type exists
-[es]> exists('hello')
+[es:'movies']> exists('hello')
 > true
 
 # get mapping
 [es:'movies']> mapping
+> {"adventure":{"properties":{"title":"string"}}}
+
+# delete
+[es:'movies']> delete
+> true
 ```
 
 Interacting with types:
@@ -69,10 +71,21 @@ Interacting with types:
 
 # get document
 [es:'movies:adventure']> get 1
+>{"_index":"movies","_type":"adventure","_id":"1","_version":1,"exists":true, "_source" : {"title":"Raiders of Last Ark"}}
 
 # get document source
 [es:'movies:adventure']> get_source 1
+> {"title":"Raiders of Last Ark"}
 
 # check if document exists
 [es:'movies:adventure']> exists? 1
+> true
+
+# delete document
+[es:'movies:adventure']> delete 1
+> true
+
+# delete mapping
+[es:'movies:adventure']> delete_mapping
+> true
 ```
