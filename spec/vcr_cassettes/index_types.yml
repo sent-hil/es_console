@@ -1,0 +1,30 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:9200/greeting/_mapping
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      accept:
+      - '*/*'
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=UTF-8
+      content-length:
+      - '140'
+    body:
+      encoding: UTF-8
+      string: '{"greeting":{"hello":{"properties":{"name":{"type":"long"},"title":{"type":"string"}}},"another":{"properties":{"name":{"type":"string"}}}}}'
+    http_version: '1.1'
+  recorded_at: Sun, 11 May 2014 07:13:29 GMT
+recorded_with: VCR 2.9.0

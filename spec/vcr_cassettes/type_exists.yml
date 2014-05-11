@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://localhost:9200/greeting/hello/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*'
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=UTF-8
+      content-length:
+      - '0'
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: '1.1'
+  recorded_at: Sun, 11 May 2014 07:13:29 GMT
+- request:
+    method: head
+    uri: http://localhost:9200/greeting/hello/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - '*/*'
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=UTF-8
+      content-length:
+      - '0'
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: '1.1'
+  recorded_at: Sun, 11 May 2014 07:13:29 GMT
+recorded_with: VCR 2.9.0
