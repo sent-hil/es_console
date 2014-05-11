@@ -16,6 +16,9 @@ module EsConsole
       resp.first[1]
     }, method: 'indices.get_mapping'
 
+    def_method :exists, method: 'indices.exists_type',
+      first_field: :type
+
     def initialize(client, index, default_args={})
       @index = index
 

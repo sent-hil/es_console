@@ -76,6 +76,12 @@ describe EsConsole do
         subject.mapping.should_not == nil
       end
     end
+
+    it 'checks for existence' do
+      VCR.use_cassette 'type_exists' do
+        subject.exists('hello').should == true
+      end
+    end
   end
 
   context EsConsole::Type do
@@ -104,7 +110,7 @@ describe EsConsole do
       end
     end
 
-    it 'checks for existence' do
+    it 'checks for existence of document' do
       VCR.use_cassette 'get_source_id' do
         subject.exists('1').should == true
         subject.exists?('1').should == true
