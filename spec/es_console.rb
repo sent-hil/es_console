@@ -91,5 +91,24 @@ describe EsConsole do
         subject.count.should == 1
       end
     end
+
+    it 'gets by id' do
+      VCR.use_cassette 'get_id' do
+        subject.get('1').should_not == nil
+      end
+    end
+
+    it 'gets source by id' do
+      VCR.use_cassette 'get_source_id' do
+        subject.get_source('1').should_not == nil
+      end
+    end
+
+    it 'checks for existence' do
+      VCR.use_cassette 'get_source_id' do
+        subject.exists('1').should == true
+        subject.exists?('1').should == true
+      end
+    end
   end
 end
