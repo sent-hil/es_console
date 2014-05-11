@@ -5,9 +5,16 @@ describe EsConsole::Resource do
     double count: {'count'=>1}
   end
 
-  it 'sends method to client' do
+  it 'sends symbol method to client' do
     resource = Class.new described_class
     resource.def_method :count
+
+    resource.new(client).count['count'].should == 1
+  end
+
+  it 'sends string method to client' do
+    resource = Class.new described_class
+    resource.def_method 'count'
 
     resource.new(client).count['count'].should == 1
   end

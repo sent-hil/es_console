@@ -64,6 +64,18 @@ describe EsConsole do
         subject.count.should == 2
       end
     end
+
+    it 'gets types' do
+      VCR.use_cassette 'index_types' do
+        subject.types.should == ['hello', 'another']
+      end
+    end
+
+    it 'gets mapping' do
+      VCR.use_cassette 'get_mapping' do
+        subject.mapping.should_not == nil
+      end
+    end
   end
 
   context EsConsole::Type do

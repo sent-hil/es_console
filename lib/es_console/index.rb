@@ -1,10 +1,20 @@
 require_relative './resource'
 
 module EsConsole
-  class Index < Resource
-    def_method :count, parser: proc {|resp| resp['count']}
-
+  class Index < Api
     attr_reader :index
+
+    def_method :types, parser: proc {|resp|
+      [].tap do |result|
+        resp.each do |index, types|
+          result << types.keys
+        end
+      end.flatten
+    }, method: 'indices.get_mapping'
+
+    def_method :mapping, parser: proc {|resp|
+      resp.first[1]
+    }, method: 'indices.get_mapping'
 
     def initialize(client, index, default_args={})
       @index = index
