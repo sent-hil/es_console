@@ -1,15 +1,22 @@
-module EsConsole
-  class Console
-    attr_reader :client
+require_relative './resource'
 
-    def self.start
-      new.pry
-    end
+module EsConsole
+  class Api < Resource
+    def_method :count, parser: proc {|resp| resp['count']}
+    def_method :stats, method: "indices.stats", parser: proc {|resp|
+      {}.tap do |result|
+        resp['indices'].each do |k, v|
+          result[k] = v['primaries']['docs']['count']
+        end
+      end
+    }
 
     def initialize
       configure_defaults
       initialize_client
       configure_pry
+
+      @default_args = {}
     end
 
     def url(url=nil)
@@ -19,21 +26,6 @@ module EsConsole
       end
 
       @url
-    end
-
-    def stats(opts={})
-      resp = client.indices.stats opts
-
-      {}.tap do |result|
-        resp['indices'].each do |k, v|
-          result[k] = v['primaries']['docs']['count']
-        end
-      end
-    end
-
-    def count(opts={})
-      resp = client.count opts
-      resp['count']
     end
 
     def index(index)

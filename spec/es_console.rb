@@ -2,12 +2,12 @@ require_relative 'spec_helper'
 
 describe EsConsole do
   it 'starts console' do
-    EsConsole::Console.any_instance.should_receive :pry
-    EsConsole::Console.start
+    EsConsole::Api.any_instance.should_receive :pry
+    EsConsole.start
   end
 
   subject do
-    EsConsole::Console.new
+    EsConsole::Api.new
   end
 
   it 'initializes client' do
