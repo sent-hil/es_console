@@ -24,13 +24,13 @@ module EsConsole
             cl = cl.send meth
           end
 
-          method = method.last
+          meth = method.last
         end
 
         if args.empty?
-          resp = cl.send method, default_args
+          resp = cl.send meth, default_args
         elsif args[0].is_a? Hash
-          resp = cl.send method, default_args.merge(args[0])
+          resp = cl.send meth, default_args.merge(args[0])
         elsif args[1].is_a? Hash
           second = if second_field
             {second_field => args[1]}
@@ -38,11 +38,11 @@ module EsConsole
             args[1]
           end
 
-          resp = cl.send method, default_args.merge(
+          resp = cl.send meth, default_args.merge(
             {first_field => args[0]}.merge(second)
           )
         else
-          resp = cl.send method, default_args.merge(
+          resp = cl.send meth, default_args.merge(
             {first_field => args[0]}
           )
         end
