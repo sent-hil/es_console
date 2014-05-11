@@ -2,11 +2,11 @@
 
 Console for interacting with elasticsearch, built on top of pry and all its goodies.
 
-## Why
+### Why
 
 Because I'm tired of typing `curl http://localhost:9200` every single time. This is a weekend project, consider this your 'here be dragons' warning.
 
-## Api
+### Api
 
 Starting the console:
 
