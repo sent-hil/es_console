@@ -128,5 +128,11 @@ describe EsConsole do
         subject.delete('1').should_not == nil
       end
     end
+
+    it 'deletes mapping' do
+      VCR.use_cassette 'type_delete_mapping' do
+        subject.delete_mapping.should == true
+      end
+    end
   end
 end

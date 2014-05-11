@@ -7,6 +7,9 @@ module EsConsole
     def_method :exists
     def_method :exists?, method: :exists
     def_method :delete
+    def_method :delete_mapping, parser: proc {|resp|
+      resp['ok']
+    }, method: 'indices.delete_mapping'
 
     attr_reader :type
 
