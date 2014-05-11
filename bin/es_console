@@ -2,4 +2,4 @@
 
 require_relative '../lib/es_console'
 
-EsConsole::Console.start
+EsConsole.start
