@@ -16,7 +16,7 @@ module EsConsole
         end
       end
 
-      define_method name do |args={}|
+      define_method name do |*args|
         res = client
 
         if method.is_a? Array
@@ -27,7 +27,19 @@ module EsConsole
           method = method.last
         end
 
-        resp = res.send method, default_args.merge(args)
+        if args.empty?
+          resp = res.send method, default_args
+        elsif args[0].is_a? Hash
+          resp = res.send method, default_args.merge(args)
+        elsif args[1].is_a? Hash
+          resp = res.send method, default_args.merge(
+            {id: args[0]}.merge(args)
+          )
+        else
+          resp = res.send method, default_args.merge({
+            id: args[0]
+          })
+        end
 
         if parser = opts[:parser] and parser.is_a? Proc
           resp = parser.call resp
