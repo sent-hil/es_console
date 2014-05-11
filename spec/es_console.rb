@@ -134,5 +134,11 @@ describe EsConsole do
         subject.delete_mapping.should == true
       end
     end
+
+    it 'creates document' do
+      VCR.use_cassette 'type_create_document' do
+        subject.create(1, {name: 'Jones'}).should == {'ok'=>true, 'version'=>1}
+      end
+    end
   end
 end

@@ -11,6 +11,15 @@ module EsConsole
       resp['ok']
     }, method: 'indices.delete_mapping'
 
+    def_method :create, parser: proc {|resp|
+      {}.tap do |result|
+        result['ok'] = resp['ok']
+        result['version'] = resp['_version']
+
+        result
+      end
+    }, second_field: :body
+
     attr_reader :type
 
     def initialize(client, index, type)
