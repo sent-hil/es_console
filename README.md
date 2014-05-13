@@ -24,11 +24,11 @@ Setting elasticsearch endpoint:
 
 `url` defaults to `http://localhost:9200`.
 
-Getting cluster stats:
+Getting all indexes info:
 
 ```
 # get list of indexes with number of docs in each
-[es]> stats
+[es]> list
 > {'myindexa' : 2, 'myindexb' : 0, 'myindexc' : 1}
 
 # count of all documents in cluster

@@ -3,7 +3,7 @@ require 'forwardable'
 module EsConsole
   class Console
     extend Forwardable
-    def_delegators :@api, :count, :stats, :index
+    def_delegators :@api, :count, :list, :index
 
     attr_reader :api
 

@@ -34,9 +34,9 @@ describe EsConsole do
     end
   end
 
-  it 'gets all stats' do
-    VCR.use_cassette 'all_stats' do
-      subject.stats.should == {'greeting'=>2, 'myindexa'=>1, 'myindex'=>1}
+  it 'gets list' do
+    VCR.use_cassette 'all_list' do
+      subject.list.should == {'greeting'=>2, 'myindexa'=>1, 'myindex'=>1}
     end
   end
 
