@@ -9,7 +9,7 @@ module EsConsole
         resp.each do |index, types|
           result << types.keys
         end
-      end.flatten
+      end.flatten.uniq
     }, method: 'indices.get_mapping'
 
     def_method :mapping, parser: proc {|resp|
