@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'pry'
-gem 'elasticsearch-api'
+gem 'elasticsearch'
 
 group :test do
   gem 'vcr'
