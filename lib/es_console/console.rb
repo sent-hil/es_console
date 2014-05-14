@@ -1,9 +1,12 @@
-require 'forwardable'
-
 module EsConsole
   class Console
-    extend Forwardable
-    def_delegators :@api, :count, :list, :index
+    def method_missing(name, *args, &blk)
+      if @api.respond_to? name
+        @api.send name, *args, &blk
+      else
+        super name, *args, &blk
+      end
+    end
 
     attr_reader :api
 
