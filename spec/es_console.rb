@@ -51,6 +51,25 @@ describe EsConsole do
     subject.index 'greeting'
   end
 
+  it 'creates template' do
+    VCR.use_cassette 'index_create_template' do
+      resp = subject.create_template('mytemplate', {template: 'mytemplate*', mappings: { type1: {type: 'string'}}})
+      resp.should == true
+    end
+  end
+
+  it 'gets template' do
+    VCR.use_cassette 'index_get_template' do
+      subject.get_template('mytemplate')['mytemplate'].should_not == nil
+    end
+  end
+
+  it 'deletes template' do
+    VCR.use_cassette 'index_delete_template' do
+      subject.delete_template('mytemplate').should == true
+    end
+  end
+
   context EsConsole::Index do
     subject do
       client = Elasticsearch::Client.new

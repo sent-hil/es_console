@@ -1,0 +1,30 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://localhost:9200/_template/mytemplate
+    body:
+      encoding: UTF-8
+      string: '{"template":"mytemplate*","mappings":{"type1":{"type":"string"}}}'
+    headers:
+      user-agent:
+      - Faraday v0.9.0
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=UTF-8
+      content-length:
+      - '31'
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"acknowledged":true}'
+    http_version: '1.1'
+  recorded_at: Wed, 14 May 2014 04:14:07 GMT
+recorded_with: VCR 2.9.0
