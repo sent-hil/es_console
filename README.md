@@ -60,6 +60,21 @@ Interacting with indexes:
 ```
 
 Interacting with types:
+```
+# create template
+[es] > create_template('mytemplate', {template: 'mytemplate*', mappings: { type1: {type: 'string'}}})
+> true
+
+# get template
+[es] > get_template 'mytemplate'
+> {"mytemplate":{"order":0,"template":"mytemplate*","settings":{},"mappings":{"type1":{"type":"string"}}}}
+
+# delete template
+[es] > delete_template 'mytemplate'
+true
+```
+
+Interacting with types:
 
 ```
 # change into type context
